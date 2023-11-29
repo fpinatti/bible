@@ -1,6 +1,8 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
+import en from './en'
+import pt from './pt'
 
 i18n
     // .use(LanguageDetector)
@@ -12,16 +14,8 @@ i18n
             escapeValue: false,
         },
         resources: {
-            en: {
-                translation: {
-                    bible: 'Bible',
-                },
-            },
-            pt: {
-                translation: {
-                    bible: 'Bíblia',
-                },
-            },
+            ...en,
+            ...pt,
         },
     })
 

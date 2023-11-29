@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit"
-import { contentSlice } from "./content.slice"
+import { bibleSlice } from "./bible.slice"
 export const store = configureStore({
     reducer: {
-        bibleContent: contentSlice.reducer,
+        bible: bibleSlice.reducer,
     },
 })

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchBibleContent } from '../store/content.slice'
+import { fetchBibleContent } from '../store/bible.slice'
 import ChapterButton from "../components/ChapterButton.component"
+import { selectBibleBooks } from "../store/bible.selector"
+import Button from "../components/Button.component"
 
 const Chapters = ({ book, setBookName }) => {
 
-    const { books } = useSelector(state => state.bibleContent)
+    // const { books } = useSelector(selectBibleBooks)
+    const books = useSelector(selectBibleBooks)
     const dispatch = useDispatch()
     const [chapters, setChapters] = useState([])
     // const [fullBookName, setFullBookName] = useState('')

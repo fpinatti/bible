@@ -3,10 +3,12 @@ import getBible from "../services/bible"
 
 export const fetchBibleContent = createAsyncThunk(
     'get/bibleContent',
-    async () => {
-        const response = getBible()
+    async (param, thunkApi) => {
+        const books = thunkApi.getState().bible?.books
+        if (books.length) return books
+        const response = await getBible()
         return response
-    }
+    },
 )
 
 const initialState = {
@@ -17,8 +19,8 @@ const initialState = {
     currentChapter: null,
 }
 
-export const contentSlice = createSlice({
-    name: 'bibleContent',
+export const bibleSlice = createSlice({
+    name: 'bible',
     initialState,
     reducers: {
         setCurrentBook: (state, { payload }) => {

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchBibleContent } from '../store/content.slice'
+import { fetchBibleContent } from '../store/bible.slice'
 import Verse from "../components/Verse.component"
+import { selectBibleBooks } from "../store/bible.selector"
 
 const Verses = ({ book, chapter, setBookName, setChapterNumber }) => {
 
-    const { books } = useSelector(state => state.bibleContent)
+    const books = useSelector(selectBibleBooks)
     const dispatch = useDispatch()
     const [verses, setVerses] = useState([])
 
@@ -24,7 +25,7 @@ const Verses = ({ book, chapter, setBookName, setChapterNumber }) => {
     }, [books])
     
     return (
-        <div className="flex flex-wrap">
+        <div className="flex-wrap inline-flex">
             { verses.map((element, index) => {
                 return <Verse key={index} verse={element} id={index}>
                     { index + 1 }
