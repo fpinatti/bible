@@ -6,10 +6,16 @@ export const fetchBibleContent = createAsyncThunk(
     async (param, thunkApi) => {
         const books = thunkApi.getState().bible?.books
         if (books.length) return books
-        const response = await getBible()
+        const response = await getBible(param)
         return response
     },
 )
+
+export enum translations {
+    Nvi = 'nvi',
+    Acf = 'acf',
+    AA = 'aa'
+}
 
 const initialState = {
     error: '',
@@ -17,6 +23,7 @@ const initialState = {
     books: [],
     currentBook: null,
     currentChapter: null,
+    translation: translations.Nvi,
 }
 
 export const bibleSlice = createSlice({
@@ -28,7 +35,10 @@ export const bibleSlice = createSlice({
         },
         setCurrentChapter: (state, { payload }) => {
             state.currentChapter = payload
-        }
+        },
+        setCurrentTranslation: (state, { payload }) => {
+            state.translation = payload
+        },
     },
     extraReducers:  (builder) => {
         builder.addCase(fetchBibleContent.fulfilled, (state, action) => {

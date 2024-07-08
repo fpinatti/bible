@@ -1,9 +1,11 @@
+import { PropsWithChildren } from 'react'
+
 type VerseProps = {
     id: number;
     verse: string;
 }
 
-const Verse = ({ id, verse }: VerseProps) => {
+const Verse = ({ id, verse }: PropsWithChildren<VerseProps>) => {
 
     return (
         <span className="flex">

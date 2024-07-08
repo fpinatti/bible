@@ -1,14 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom"
 import Chapters from "../features/Chapters.feature"
 import { useState } from "react"
-import { useTranslation } from "react-i18next"
+// import { useTranslation } from "react-i18next"
 import Button from "../components/Button.component"
+import { ArrowBackIcon } from '@chakra-ui/icons'
 
 const Book = () => {
 
     const { book } = useParams()
     const [bookName, setBookName] = useState('')
-    const { t } = useTranslation()
+    // const { t } = useTranslation()
 
     const navigate = useNavigate()
     
@@ -20,7 +21,8 @@ const Book = () => {
         <section>
             <div className="flex justify-center items-center gap-3">
                 <Button onClick={onClickBack}>
-                { t('back') }
+                {/* { t('back') } */}
+                <ArrowBackIcon />
                 </Button>
                 <h1 className="text-center">{ bookName }</h1>
             </div>

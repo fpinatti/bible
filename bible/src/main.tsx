@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
@@ -12,10 +12,12 @@ const router = createBrowserRouter(routes)
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ChakraProvider>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
-    </ChakraProvider>
+    <Suspense>
+      <ChakraProvider>
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
+      </ChakraProvider>
+    </Suspense>
   </React.StrictMode>,
 )

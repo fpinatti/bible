@@ -1,6 +1,7 @@
-import Chapter from '../pages/Chapter.page'
-import Book from '../pages/Book.page'
-import Home from '../pages/Home.page'
+import { lazy } from 'react'
+const Chapter = lazy(() => import('../pages/Chapter.page'))
+const Book = lazy(() => import('../pages/Book.page'))
+const  Home = lazy(() => import('../pages/Home.page'))
 import App from '../pages/App.page'
 
 const routes = [

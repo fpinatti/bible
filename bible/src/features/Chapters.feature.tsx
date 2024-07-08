@@ -3,22 +3,28 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchBibleContent } from '../store/bible.slice'
 import ChapterButton from "../components/ChapterButton.component"
 import { selectBibleBooks } from "../store/bible.selector"
-import Button from "../components/Button.component"
+import { BookElement } from './Books.feature'
 
-const Chapters = ({ book, setBookName }) => {
+export type ChaptersProps = {
+    book: string;
+    setBookName: (book: string) => void;
+}
+
+const Chapters = ({ book, setBookName }: ChaptersProps) => {
 
     // const { books } = useSelector(selectBibleBooks)
     const books = useSelector(selectBibleBooks)
+    const translation = useSelector((state) => state.bible)
     const dispatch = useDispatch()
     const [chapters, setChapters] = useState([])
     // const [fullBookName, setFullBookName] = useState('')
 
     useEffect(() => {
-        dispatch(fetchBibleContent())
-    }, [])
+        dispatch(fetchBibleContent(translation.translation))
+    }, [translation.translation])
 
     useEffect(() => {
-        const filteredChapters = books.filter((element) => element.abbrev === book)
+        const filteredChapters = books.filter((element: BookElement) => element.abbrev === book)
         if (filteredChapters[0]) {
             setBookName(filteredChapters[0].name)
             setChapters(filteredChapters[0].chapters)

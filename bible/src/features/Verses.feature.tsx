@@ -3,8 +3,17 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchBibleContent } from '../store/bible.slice'
 import Verse from "../components/Verse.component"
 import { selectBibleBooks } from "../store/bible.selector"
+import { BookElement } from './Books.feature'
 
-const Verses = ({ book, chapter, setBookName, setChapterNumber }) => {
+type VersesProp = {
+    book: string;
+    chapter: number;
+    setBookName: (book: string) => void;
+    setChapterNumber: (chapter: number) => void;
+}
+
+
+const Verses = ({ book, chapter, setBookName, setChapterNumber }: VersesProp) => {
 
     const books = useSelector(selectBibleBooks)
     const dispatch = useDispatch()
@@ -15,7 +24,7 @@ const Verses = ({ book, chapter, setBookName, setChapterNumber }) => {
     }, [])
 
     useEffect(() => {
-        const filteredChapter = books.filter((element) => element.abbrev === book)
+        const filteredChapter = books.filter((element: BookElement) => element.abbrev === book)
         if (filteredChapter[0]) {
             const rawVerses = filteredChapter[0].chapters[chapter - 1]
             setVerses(rawVerses)
